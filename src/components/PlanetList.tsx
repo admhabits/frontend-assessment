@@ -7,6 +7,14 @@ import PlanetDetailPopup from './PlanetDetail';
 
 interface Planet {
     name: string;
+    rotation_period: string;
+	orbital_period: string,
+	diameter: string,
+	climate: string,
+	gravity: string,
+	terrain: string,
+	surface_water: string,
+	population: string,
     inWishlist: string[];
 }
 
@@ -17,11 +25,14 @@ const PlanetList: FC = () => {
     const [showPopup, setShowPopup] = useState(false);
 
     const [selectedPlanet, setSelectedPlanet] = useState({
-        planetName: 'Planet Name',
-        description: 'Planet Description',
+        nama: 'Planet Name',
+        rotasi: 'Rotasi Planet',
+        orbit: 'Orbit Planet',
+        diameter: '0',
+        population: '0',
     });
 
-    const openPopup = (planet: { planetName: string; description: string }) => {
+    const openPopup = (planet: { nama: string; rotasi: string, orbit: string, diameter: string, population: string }) => {
         setSelectedPlanet(planet);
         setShowPopup(true);
     };
@@ -102,7 +113,13 @@ const PlanetList: FC = () => {
                                 </button>
                                 <button
                                     className={`flex-1 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 text-sm`}
-                                onClick={() => openPopup({ planetName: 'Planet 1', description: 'Description 1' })}
+                                onClick={() => openPopup({ 
+                                    nama: planet.name, 
+                                    rotasi: planet.rotation_period,
+                                    orbit: planet.orbital_period,
+                                    diameter:  planet.diameter,
+                                    population: planet.population,
+                                })}
                                 >
                                     <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                                     View Detail
@@ -110,8 +127,11 @@ const PlanetList: FC = () => {
                             </div>
                             {showPopup && (
                                 <PlanetDetailPopup
-                                    planetName={selectedPlanet.planetName}
-                                    description={selectedPlanet.description}
+                                    nama={selectedPlanet.nama}
+                                    rotasi={selectedPlanet.rotasi}
+                                    orbit={selectedPlanet.orbit}
+                                    diameter={selectedPlanet.diameter}
+                                    population={selectedPlanet.population}
                                     onClose={closePopup}
                                 />
                             )}

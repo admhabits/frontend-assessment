@@ -3,14 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface PlanetDetailPopupProps {
-  planetName: string;
-  description: string;
+  nama: string;
+  rotasi: string;
+  orbit: string,
+  diameter: string,
+  population: string,
   onClose: () => void; // Callback to close the popup
 }
 
 const PlanetDetailPopup: React.FC<PlanetDetailPopupProps> = ({
-  planetName,
-  description,
+  nama,
+  rotasi,
+  orbit,
+  diameter,
+  population,
   onClose,
 }) => {
   return (
@@ -22,8 +28,11 @@ const PlanetDetailPopup: React.FC<PlanetDetailPopupProps> = ({
         >
           <FontAwesomeIcon icon={faTimes} className="mr-2" />
         </button>
-        <h2 className="text-2xl font-bold mb-2">{planetName}</h2>
-        <p className="text-gray-600">{description}</p>
+        <h2 className="text-2xl font-bold mb-2">{nama}</h2>
+        <p className="text-gray-600">{rotasi}</p>
+        <p className="text-gray-600">{orbit}</p>
+        <p className="text-gray-600">{diameter}</p>
+        <p className="text-gray-600">{population}</p>
       </div>
     </div>
   );
