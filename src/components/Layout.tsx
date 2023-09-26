@@ -8,7 +8,7 @@ const Layout: React.FC<LayoutComponentType> = ({ children }) => {
     return (
         <div>
             <nav className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-3 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
-                <div className="flex w-full flex-wrap items-center justify-between px-3">
+                <div className="flex sticky bottom-0 w-full flex-wrap items-center justify-between px-3">
                     <a className="ml-2 text-xl font-oswald text-xl font-semibold" href="/">
                         MY PLANETS
                     </a>
