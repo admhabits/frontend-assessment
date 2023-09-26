@@ -9,6 +9,7 @@ interface PlanetDetailPopupProps {
     orbit: string;
     diameter: string;
     population: string;
+    createdDate: string;
     onClose: () => void; // Callback to close the popup
 }
 
@@ -18,8 +19,16 @@ const PlanetDetailPopup: React.FC<PlanetDetailPopupProps> = ({
     orbit,
     diameter,
     population,
+    createdDate,
     onClose,
 }) => {
+    const formattedDate = new Date(createdDate).toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             {/* Background Animation */}
@@ -37,13 +46,17 @@ const PlanetDetailPopup: React.FC<PlanetDetailPopupProps> = ({
                     {/* Planet Avatar Skeleton */}
                     <div className="bg-gray-200 w-32 h-32 rounded-full animate-pulse" />
                     <h2 className="text-3xl font-oswald font-semibold mb-2">{nama}</h2>
+                    <div className="flex items-center">
+                        <div className="text-gray-600 text-sm font-medium mr-2">Created Date:</div>
+                        <div className="text-gray-800 text-sm font-semibold">{formattedDate}</div>
+                    </div>
                 </div>
                 <div className="flex flex-col">
-                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                             <div className="overflow-hidden">
-                                <table className="min-w-full text-left text-sm font-light">
-                                    <thead className="border-b font-medium dark:border-neutral-500">
+                                <table className="table-auto text-left text-sm font-light">
+                                    <thead className="border-b font-small dark:border-neutral-500">
                                         <tr>
                                             <th scope="col" className="px-6 py-4">
                                                 Rotation

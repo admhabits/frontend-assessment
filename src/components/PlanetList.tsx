@@ -8,13 +8,14 @@ import PlanetDetailPopup from './PlanetDetail';
 interface Planet {
     name: string;
     rotation_period: string;
-	orbital_period: string,
-	diameter: string,
-	climate: string,
-	gravity: string,
-	terrain: string,
-	surface_water: string,
-	population: string,
+	orbital_period: string;
+	diameter: string;
+	climate: string;
+	gravity: string;
+	terrain: string;
+	surface_water: string;
+    created: string;
+	population: string;
     inWishlist: string[];
 }
 
@@ -30,9 +31,10 @@ const PlanetList: FC = () => {
         orbit: 'Orbit Planet',
         diameter: '0',
         population: '0',
+        created: '',
     });
 
-    const openPopup = (planet: { nama: string; rotasi: string, orbit: string, diameter: string, population: string }) => {
+    const openPopup = (planet: { nama: string; rotasi: string, orbit: string, diameter: string, population: string, created: string }) => {
         setSelectedPlanet(planet);
         setShowPopup(true);
     };
@@ -120,6 +122,7 @@ const PlanetList: FC = () => {
                                     orbit: planet.orbital_period,
                                     diameter:  planet.diameter,
                                     population: planet.population,
+                                    created: planet.created
                                 })}
                                 >
                                     <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
@@ -133,6 +136,7 @@ const PlanetList: FC = () => {
                                     orbit={selectedPlanet.orbit}
                                     diameter={selectedPlanet.diameter}
                                     population={selectedPlanet.population}
+                                    createdDate={selectedPlanet.created}
                                     onClose={closePopup}
                                 />
                             )}
