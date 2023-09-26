@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface Planet {
@@ -21,7 +23,7 @@ const PlanetList: FC = () => {
             setWishlist([...wishlist, planet]);
         }
     };
-    
+
     const fetchPlanets = async () => {
         try {
             const response = await axios.get('https://swapi.dev/api/planets');
@@ -59,22 +61,36 @@ const PlanetList: FC = () => {
                 }
                 height={'90vh'}
             >
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 ">
                     {planets.map((planet, index) => (
                         <div
                             key={index}
                             className="gap-4 p-4 m-2 border rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
                         >
-                            {planet.name}
-                            <button
-                                className={`w-full mt-2 py-2 rounded-md ${planet.inWishlist
-                                        ? 'bg-red-500 text-white hover:bg-red-600'
-                                        : 'bg-green-500 text-white hover:bg-green-600'
-                                    }`}
-                                onClick={() => toggleWishlist(planet)}
-                            >
-                                {planet.inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-                            </button>
+                            <h3 className="font-oswald text-xl font-semibold mb-2">{planet.name}</h3>
+                            <div className="flex items-center mb-4">
+                                <div className="w-12 h-12 bg-gray-300 rounded-full animate-pulse"></div>
+                                <div className="ml-4">
+                                    <div className="w-24 h-4 bg-gray-300 rounded animate-pulse"></div>
+                                    <div className="w-16 h-4 bg-gray-300 rounded mt-2 animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div className="flex space-x-2 mt-2">
+                                <button
+                                    className={`flex-1 py-2 rounded-md bg-green-500 text-white hover:bg-green-600 text-sm`}
+                                    onClick={() => toggleWishlist(planet)}
+                                >
+                                    <FontAwesomeIcon icon={faHeart} className="mr-2" />
+                                    {planet.inWishlist ? 'Unlike' : 'Add Wishlist'}
+                                </button>
+                                <button
+                                    className={`flex-1 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 text-sm`}
+                                // onClick={() => viewDetail(planet)}
+                                >
+                                    <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
+                                    View Detail
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
