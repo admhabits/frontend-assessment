@@ -4,12 +4,24 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface Planet {
     name: string;
+    inWishlist: string[];
 }
 
 const PlanetList: FC = () => {
     const [planets, setPlanets] = useState<Planet[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(true);
+    const [wishlist, setWishlist] = useState<Planet[]>([]);
 
+    const toggleWishlist = (planet: Planet) => {
+        if (planet.inWishlist) {
+            // Remove the planet from the wishlist
+            setWishlist(wishlist.filter((p) => p.name !== planet.name));
+        } else {
+            // Add the planet to the wishlist
+            setWishlist([...wishlist, planet]);
+        }
+    };
+    
     const fetchPlanets = async () => {
         try {
             const response = await axios.get('https://swapi.dev/api/planets');
@@ -54,6 +66,15 @@ const PlanetList: FC = () => {
                             className="gap-4 p-4 m-2 border rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
                         >
                             {planet.name}
+                            <button
+                                className={`w-full mt-2 py-2 rounded-md ${planet.inWishlist
+                                        ? 'bg-red-500 text-white hover:bg-red-600'
+                                        : 'bg-green-500 text-white hover:bg-green-600'
+                                    }`}
+                                onClick={() => toggleWishlist(planet)}
+                            >
+                                {planet.inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                            </button>
                         </div>
                     ))}
                 </div>
