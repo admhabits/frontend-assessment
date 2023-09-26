@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutComponentType> = ({ children }) => {
                     </div>
                 </div>
             </nav>
-            <div style={{ margin: 10}}>
+            <div style={{ margin: 30}}>
                 {children}
             </div>
         </div>
