@@ -61,6 +61,7 @@ const PlanetList: FC = () => {
                 }
                 height={'90vh'}
             >
+                <h3 className="font-oswald text-xl font-semibold mb-2 mx-3">Data planet <span className='text-red-500'>{planets.length}</span></h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 ">
                     {planets.map((planet, index) => (
                         <div

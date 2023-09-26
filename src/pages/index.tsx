@@ -15,9 +15,7 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      <Layout>
         <PlanetList />
-      </Layout>
     </div>
   );
 };
