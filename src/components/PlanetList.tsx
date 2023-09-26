@@ -70,6 +70,7 @@ const PlanetList: FC = () => {
 
     return (
         <div>
+            
             <InfiniteScroll
                 dataLength={planets.length}
                 next={loadMore}

@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Layout from 'components/Layout';
 import PlanetList from 'components/PlanetList';
 
 const Home: NextPage = () => {
