@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import PlanetDetailPopup from './PlanetDetail';
 
 interface Planet {
     name: string;
@@ -13,6 +14,21 @@ const PlanetList: FC = () => {
     const [planets, setPlanets] = useState<Planet[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [wishlist, setWishlist] = useState<Planet[]>([]);
+    const [showPopup, setShowPopup] = useState(false);
+
+    const [selectedPlanet, setSelectedPlanet] = useState({
+        planetName: 'Planet Name',
+        description: 'Planet Description',
+    });
+
+    const openPopup = (planet: { planetName: string; description: string }) => {
+        setSelectedPlanet(planet);
+        setShowPopup(true);
+    };
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
 
     const toggleWishlist = (planet: Planet) => {
         if (planet.inWishlist) {
@@ -86,12 +102,19 @@ const PlanetList: FC = () => {
                                 </button>
                                 <button
                                     className={`flex-1 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 text-sm`}
-                                // onClick={() => viewDetail(planet)}
+                                onClick={() => openPopup({ planetName: 'Planet 1', description: 'Description 1' })}
                                 >
                                     <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                                     View Detail
                                 </button>
                             </div>
+                            {showPopup && (
+                                <PlanetDetailPopup
+                                    planetName={selectedPlanet.planetName}
+                                    description={selectedPlanet.description}
+                                    onClose={closePopup}
+                                />
+                            )}
                         </div>
                     ))}
                 </div>
